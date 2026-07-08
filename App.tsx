@@ -13,7 +13,25 @@ export default function App() {
   const [mensagem, setMensagem] = useState("");
   const [posts, setPosts] = useState<Post[]>([]); //pode-se tipar o tipo de variável (chamar). Foi delcarado como chamar acima.
 
-  useEffect(() => {
+ 
+
+ useEffect(() => {
+    buscarDados()
+  }, []);
+
+
+
+async function buscarDados(){
+  const postsApi=await fetch("https://jsonplaceholder.typicode.com/posts") // busca mensaagens em outro servidor
+      .then((resposta) => resposta.json()) // converte a resposta para Json
+    setPosts(postsApi)
+
+
+}
+
+ /* FUNÇÃO BUSCAR DADOS (de cima) VERSÃO EXTENDIDA 
+ 
+ useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/posts") // busca mensaagens em outro servidor
       .then((resposta) => resposta.json()) // converte a resposta para Json
       .then((resposta) => {
@@ -25,6 +43,7 @@ export default function App() {
         console.log("Deu erro :(", err);
       });
   }, []);
+*/
 
 
   return (
